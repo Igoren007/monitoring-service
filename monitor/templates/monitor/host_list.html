@@ -1,0 +1,28 @@
+{% extends 'monitor/home_base.html' %}
+{% load static %}
+
+{% block rightbar %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>DNS имя</th>
+                <th>IP адрес</th>
+                <th>Интервал</th>
+                <th>Прим.</th>
+            </tr>
+        </thead>
+	    <tbody>
+            {% for item in object_list %}
+                 <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.dns_name }}</td>
+                    <td>{{ item.ip_addr }}</td>
+                    <td>{{ item.time_interval }}</td>
+                    <td>ред</td>
+                </tr>
+            {% endfor %}
+    	</tbody>
+    </table>
+
+{% endblock %}
