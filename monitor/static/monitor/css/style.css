@@ -272,3 +272,8 @@ body {
 .table tbody tr:nth-child(even){
 	background: #F7F7F7;
 }
+
+.task__delete_img {
+    width: 20px;
+    height: 20px;
+}

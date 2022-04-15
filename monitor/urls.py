@@ -12,6 +12,7 @@ urlpatterns = [
     path('settings/', settings, name='settings'),
     path('events/', events, name='events'),
     path('reports/', reports, name='reports'),
-    path('edit_host/', edit_host, name='edit_host'),
+    path('edit_host/<int:pk>', HostEdit.as_view(), name='edit_host'),
+    path('delete_host/<int:pk>', delete_host, name='delete_host'),
     path('host_list/', HostList.as_view(), name='host_list'),
 ]

@@ -5,9 +5,9 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 
-from monitor.forms import CreateCustomUserForm, LoginCustomUserForm, CreateHostForm
+from monitor.forms import CreateCustomUserForm, LoginCustomUserForm, CreateHostForm, HostEditForm
 
 # home_menu = {'home': 'Главная',
 #              'events': 'События',
@@ -151,6 +151,27 @@ class HostList(ListView):
         return context
 
 
+class HostEdit(UpdateView):
+    template_name = 'monitor/edit_host.html'
+    model = Host
+    form_class = HostEditForm
+    success_url = reverse_lazy('host_list')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = home_menu
+        context['title'] = 'Редактирование хоста'
+        return context
+
+
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+
+def delete_host(request, pk):
+    try:
+        Host.objects.filter(id=pk).delete()
+        return redirect('host_list')
+    except:
+        return redirect('host_list')

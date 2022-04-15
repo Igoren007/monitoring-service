@@ -14,6 +14,7 @@ class Host(models.Model):
     dns_name = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     time_interval = models.IntegerField()
+    is_active = models.BooleanField(default=False)
 
 
 class HostAvailability(models.Model):

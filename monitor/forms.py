@@ -13,7 +13,7 @@ class CreateCustomUserForm(UserCreationForm):
     position = forms.CharField(label='Должность', widget=forms.TextInput(attrs={'placeholder': 'Должность'}))
     first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'placeholder': 'Имя'}))
     last_name = forms.CharField(label='Фамилия', widget=forms.TextInput(attrs={'placeholder': 'Фамилия'}))
-    is_admin = forms.BooleanField(required=False, label='Права администратора', )
+    is_admin = forms.BooleanField(required=False, label='Права администратора')
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'placeholder': 'Пароль'}))
     password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'placeholder': 'Повтор пароля'}))
 
@@ -32,7 +32,27 @@ class CreateHostForm(forms.ModelForm):
     ip_addr = forms.CharField(label='IP адрес', widget=forms.TextInput(attrs={'placeholder': 'IP'}))
     dns_name = forms.CharField(label='DNS имя', widget=forms.TextInput(attrs={'placeholder': 'DNS имя'}))
     time_interval = forms.IntegerField(label='Интервал мониторинга, мин', widget=forms.NumberInput(attrs={'placeholder': 'Интервал'}))
+    is_active = forms.BooleanField(required=False, label='Необходимость мониторинга')
 
     class Meta:
         model = Host
-        fields = ('ip_addr', 'dns_name', 'time_interval')
+        fields = ('title', 'ip_addr', 'dns_name', 'time_interval', 'is_active')
+
+
+class HostEditForm(forms.ModelForm):
+    class Meta:
+        model = Host
+        fields = ('title', 'ip_addr', 'dns_name', 'time_interval', 'is_active')
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Заголовок'}),
+            'ip_addr': forms.TextInput(attrs={'placeholder': 'IP'}),
+            'dns_name': forms.TextInput(attrs={'placeholder': 'DNS имя'}),
+            'time_interval': forms.NumberInput(attrs={'placeholder': 'Интервал'})
+            }
+        labels = {
+            'title': 'Заголовок',
+            'ip_addr': 'IP адрес',
+            'dns_name': 'DNS имя',
+            'time_interval': 'Интервал мониторинга, мин',
+            'is_active': 'Необходимость мониторинга'
+        }
