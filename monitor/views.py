@@ -6,17 +6,9 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView
-
 from monitor.forms import CreateCustomUserForm, LoginCustomUserForm, CreateHostForm, HostEditForm
-
-# home_menu = {'home': 'Главная',
-#              'events': 'События',
-#              'reports': 'Отчеты',
-#              'host_list': 'Список хостов',
-#              'settings': 'Настройки',
-#              'about': 'Справка',
-#              }
 from monitor.models import Host
+
 
 home_menu = {'up': {
                  'home': 'Главная',
